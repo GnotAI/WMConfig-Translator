@@ -10,9 +10,10 @@ class Hyprland : public WindowManager {
     explicit Hyprland();
     ~Hyprland() override;
 
-    std::string getImportWord() const override;
+    std::string getImportToken() const override;
     std::string getFileName() const override; 
     std::string getConfigDir() const override;
+    int getImportTokenIndex() const override;
 };
 
 #endif

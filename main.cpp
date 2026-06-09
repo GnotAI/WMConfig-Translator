@@ -2,7 +2,7 @@
 #include "includes/conf_utils.h"
 #include "includes/hyprland.h"
 
-int main () {
+int main (int argc, char *argv[]) {
 
   Hyprland hypr;
   std::cout << "[INFO] File path created.\n";

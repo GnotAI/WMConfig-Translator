@@ -1,15 +1,15 @@
-#include <cstdlib>
 #include <format>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <vector>
 #include "../includes/conf_utils.h"
 #include "../includes/window_manager.h"
 #include "../includes/formatting.h"
 
-std::vector<std::string> generateSourceAndDestPaths(std::string homePath, WindowManager& wm) {
+std::vector<std::string> generateSourceAndDestPaths(const std::string_view homePath, WindowManager& wm) {
   std::string windowManagerFileName{ wm.getFileName() }; 
   std::string windowManagerSourcePath{ wm.getConfigDir() };
   std::string destinationFilePath { std::format("{0}/Documents/{1}", homePath, windowManagerFileName) };
@@ -22,7 +22,7 @@ void generateFullFile(WindowManager& wm) {
   std::string token;
   std::vector<std::string> tokens;
 
-  std::string homeDir { getenv("HOME") };
+  const std::string_view homeDir { getenv("HOME") };
   std::vector<std::string> filePaths = { generateSourceAndDestPaths(homeDir, wm) };
 
   std::ifstream srcFile( filePaths[0] );
@@ -42,11 +42,11 @@ void generateFullFile(WindowManager& wm) {
     if (tokens.empty()) {
       continue;
     }
-    else if (tokens[0] != wm.getImportWord()) {
+    else if (tokens[0] != wm.getImportToken()) {
       destFile << line << '\n';
     } 
     else {
-      std::string newFileLoc{tokens[2]};
+      std::string newFileLoc{tokens[wm.getImportTokenIndex()]};
       dirHardFormat(newFileLoc);
       std::ifstream newSrcFile(newFileLoc);
       destFile << newSrcFile.rdbuf() << "\n\n";

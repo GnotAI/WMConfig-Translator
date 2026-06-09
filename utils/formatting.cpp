@@ -13,6 +13,6 @@ std::string trim(const std::string& s) {
 }
 
 void dirHardFormat(std::string& s) {
-				const std::string homeDir{ getenv("HOME") };
-				s.replace(0, 1, homeDir);
+  const std::string homeDir{ getenv("HOME") };
+  s.replace(0, 1, homeDir);
 }

@@ -3,15 +3,10 @@
 #define CONF_UTILS_H
 
 #include <string>
+#include <vector>
+#include "window_manager.h"
 
-enum class WM {
-	Hypr,
-	Niri,
-	Mangowc,
-	Sway
-};
-
-std::string getKeyword(const WM& wm);
-void generateFullFile(std::string& srcPath, std::string& destPath, WM wm);
+std::vector<std::string> generateSourceAndDestPaths(std::string homePath, WindowManager& wm);
+void generateFullFile(WindowManager& wm);
 
 #endif

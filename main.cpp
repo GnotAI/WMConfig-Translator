@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string_view>
-//#include "includes/conf_utils.h"
+#include "includes/conf_utils.h"
 #include "includes/hyprland.h"
 #include "includes/niri.h"
 #include "window_manager.h"
@@ -32,7 +32,7 @@ int main (int argc, char *argv[]) {
   std::cout << "[INFO] File path created.\n";
   std::cout << "------------ Start parsing. -------------" << '\n';
 
-  //generateFullFile(*managerObject);
+  generateFullFile(*managerObject);
 
   std::cout << "------------ Done parsing. -------------" << '\n';
 

@@ -5,11 +5,14 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <filesystem>
 #include "../includes/conf_utils.h"
 #include "../includes/formatting.h"
 #include "../includes/window_manager.h"
 #include "../includes/hyprland.h"
 #include "../includes/niri.h"
+
+namespace fs = std::filesystem;
 
 std::vector<std::string> generateSourceAndDestPaths(const std::string_view homePath, WindowManager& wm) {
 
@@ -17,12 +20,20 @@ std::vector<std::string> generateSourceAndDestPaths(const std::string_view homeP
   std::string sourceFilePath;
 
   if (typeid(wm) == typeid(Hyprland)) {
+
+    fs::path destPath { std::format("{0}/Documents/wmconfig/hypr", homePath) };
+    fs::create_directories(destPath);
+
     sourceFilePath = std::format("{0}/.config/hypr/hyprland.conf", homePath);
-    destinationFilePath =  std::format("{0}/Documents/hypr/hyprland.conf", homePath);
+    destinationFilePath =  std::format("{0}/Documents/wmconfig/hypr/hyprland.conf", homePath);
   }
   if (typeid(wm) == typeid(Niri)) {
+
+    fs::path destPath { std::format("{0}/Documents/wmconfig/niri", homePath) };
+    fs::create_directories(destPath);
+
     sourceFilePath = std::format("{0}/.config/niri/config.kdl", homePath);
-    destinationFilePath =  std::format("{0}/Documents/niri/config.kdl", homePath); 
+    destinationFilePath =  std::format("{0}/Documents/wmconfig/niri/config.kdl", homePath); 
   }
   return { sourceFilePath, destinationFilePath };
 }
@@ -38,8 +49,13 @@ void generateFullFile(WindowManager& wm) {
   std::ifstream srcFile( filePaths[0] );
   std::ofstream destFile( filePaths[1] );
 
-  if (!srcFile.is_open() || !destFile.is_open()) {
-    std::cout << "Failed to create a file." << "\n";
+  if (!srcFile.is_open()) {
+    std::cout << "[ERROR] Failed to open source file. \n";
+    exit(1);
+  }
+  if (!destFile.is_open()) {
+    std::cout << "[ERROR] Failed to create a destination file. \n";
+    exit(1);
   } 
 
   while (std::getline(srcFile, line)) {

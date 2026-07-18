@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(WMConfig-Translator
   utils/hyprland.cpp
+  utils/niri.cpp
   utils/formatting.cpp
   utils/conf_utils.cpp
   main.cpp

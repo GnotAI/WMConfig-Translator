@@ -11,8 +11,6 @@ class Hyprland : public WindowManager {
     ~Hyprland() override;
 
     std::string getImportToken() const override;
-    std::string getFileName() const override; 
-    std::string getConfigDir() const override;
     int getImportTokenIndex() const override;
 };
 

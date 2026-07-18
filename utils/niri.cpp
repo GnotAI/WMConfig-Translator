@@ -9,14 +9,6 @@ Niri::~Niri() {
   std::cout << "[INFO] Niri wm destroyed.\n";
 }
 
-std::string Niri::getFileName() const {
-  return "config.kdl";
-}
-
-std::string Niri::getConfigDir() const {
-  return "niri/config.kdl";
-}
-
 std::string Niri::getImportToken() const {
   return "include";
 }

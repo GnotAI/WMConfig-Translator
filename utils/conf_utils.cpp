@@ -6,14 +6,24 @@
 #include <string_view>
 #include <vector>
 #include "../includes/conf_utils.h"
-#include "../includes/window_manager.h"
 #include "../includes/formatting.h"
+#include "../includes/window_manager.h"
+#include "../includes/hyprland.h"
+#include "../includes/niri.h"
 
 std::vector<std::string> generateSourceAndDestPaths(const std::string_view homePath, WindowManager& wm) {
-  std::string windowManagerFileName{ wm.getFileName() }; 
-  std::string windowManagerSourcePath{ wm.getConfigDir() };
-  std::string destinationFilePath { std::format("{0}/Documents/{1}", homePath, windowManagerFileName) };
-  std::string sourceFilePath { std::format("{0}/.config/{1}", homePath, windowManagerSourcePath) };
+
+  std::string destinationFilePath;
+  std::string sourceFilePath;
+
+  if (typeid(wm) == typeid(Hyprland)) {
+    sourceFilePath = std::format("{0}/.config/hypr/hyprland.conf", homePath);
+    destinationFilePath =  std::format("{0}/Documents/hypr/hyprland.conf", homePath);
+  }
+  if (typeid(wm) == typeid(Niri)) {
+    sourceFilePath = std::format("{0}/.config/niri/config.kdl", homePath);
+    destinationFilePath =  std::format("{0}/Documents/niri/config.kdl", homePath); 
+  }
   return { sourceFilePath, destinationFilePath };
 }
 

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include "../includes/formatting.h"
 
@@ -14,4 +15,17 @@ std::string trim(const std::string& s) {
 void dirHardFormat(std::string& s) {
   const std::string homeDir{ getenv("HOME") };
   s.replace(0, 1, homeDir);
+}
+
+void showHelp() {
+    std::cout << "\nA program to translate your DE config files to another DE config syntax.\n";
+    std::cout << "\n";
+    std::cout << "Usage: ./WMConfig-Translator [OPTION]\n";
+    std::cout << "\n";
+    std::cout << "Arguments: \n";
+    std::cout << "  [OPTION]\n";
+    std::cout << "    -H, --hypr : Hyprland \n";
+    std::cout << "    -N, --niri : Niri \n";
+    std::cout << "    -M, --mango : MangoWC \n";
+    std::cout << "    -S, --sway : Swaync \n";
 }

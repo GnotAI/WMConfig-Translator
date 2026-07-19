@@ -6,5 +6,6 @@
 
 std::string trim(const std::string& s);
 void dirHardFormat(std::string& s);
+void showHelp();
 
 #endif

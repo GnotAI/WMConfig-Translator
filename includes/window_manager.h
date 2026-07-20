@@ -2,14 +2,18 @@
 #ifndef WINDOW_MANAGER_H
 #define WINDOW_MANAGER_H
 
-#include <string>
+#include <string_view>
 
 class WindowManager {
-  public:
-    virtual std::string getImportToken() const = 0;
-    virtual int getImportTokenIndex() const = 0;
+  protected:
+    const int importTokenIndex;
+    const std::string_view importToken;
 
+  public:
+    WindowManager(const std::string_view& stringValue, const int intValue);
     virtual ~WindowManager() = default;
+    std::string_view getImportToken() const;
+    int getImportTokenIndex() const;
 };
 
 #endif

@@ -1,18 +1,5 @@
-#include <iostream>
 #include "../includes/hyprland.h"
+#include "window_manager.h"
 
-Hyprland::Hyprland() {
-  std::cout << "[INFO] Hypr wm created.\n";
-}
+Hyprland::Hyprland(): WindowManager("source", 2) {}
 
-Hyprland::~Hyprland() { 
-  std::cout << "[INFO] Hypr wm destroyed.\n";
-}
-
-std::string Hyprland::getImportToken() const {
-  return "source";
-}
-
-int Hyprland::getImportTokenIndex() const {
-  return 2;
-}
